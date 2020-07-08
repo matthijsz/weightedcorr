@@ -39,7 +39,7 @@ Where
 
 First, initial ranks (_z_) are assigned to x and y. Duplicate groups of records are assigned the average rank of that group. Next the weighted rank (_rank_) is calculated for x and y separately in _n_ pairs. Such that the _j_-th _rank_ of either x or y will be:
 
-<img src="https://render.githubusercontent.com/render/math?math=rank_j = \sum_{i=1}^n (w_i *{\bf A} (z_i, z_j)) %2B \frac{1+\sum_{i=1}^{n} {\bf B}(w_i, w_j)} {2} * \frac{\sum_{i=1}^{n} w_i*{\bf B}(w_i, w_j)}{\sum_{i=1}^{n} {\bf B}(w_i, w_j)}" height="60">
+<img src="https://render.githubusercontent.com/render/math?math=rank_j = \sum_{i=1}^n (w_i *{\bf A} (z_i, z_j)) %2B \frac{1%2B\sum_{i=1}^{n} {\bf B}(w_i, w_j)} {2} * \frac{\sum_{i=1}^{n} w_i*{\bf B}(w_i, w_j)}{\sum_{i=1}^{n} {\bf B}(w_i, w_j)}" height="60">
 
 
 Where
