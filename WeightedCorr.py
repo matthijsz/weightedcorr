@@ -16,10 +16,6 @@ class WeightedCorr:
         if (df is None) and (wcol is None):
             if np.all([i is None for i in [xyw, x, y, w]]):
                 raise ValueError('No data supplied')
-            print(type(xyw))
-            print(type(x))
-            print(type(y))
-            print(type(w))
             if (isinstance(xyw, pd.DataFrame)) != np.all([isinstance(i, pd.Series) for i in [x, y, w]]):
                 raise TypeError('xyw should be a pd.DataFrame, or x, y, w should be pd.Series')
             xyw = pd.concat([x, y, w], axis=1).dropna() if xyw is None else xyw.dropna()
