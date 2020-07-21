@@ -3,6 +3,18 @@ Weighted correlation in Python. Pandas based implementation of weighted Pearson 
 
 I thought it was strange that I couldn't easily find a way to get both these weighted correlations with a single class/function in Python. So I made it myself.
 
+# V2 Update 21-07-2020
+
+Switched from a `pandas` backend to a `numpy`/`scipy` backend. Usage remains the same, but performance for Spearman correlations is significantly improved. See table below.
+
+| N samples     |    Pearson_v1 |   Pearson_v2 |  Spearman_v1 |  Spearman_v2 | 
+| ------------- | ------------- |------------- |------------- |------------- |
+| 10 | 3.55 ms ± 64.1 µs  | **1.59 ms** ± 9.32 µs | 14 ms ± 131 µs | **1.78 ms** ± 7.55 µs |
+| 100  | 6.69 ms ± 89 µs  | **4.94 ms** ± 79.9 µs | 21.4 ms ± 979 µs | **5.08 ms** ± 144 µs |
+| 1000  | 39.1 ms ± 426 µs  | **93.7 ms** ± 1.03 ms | 93.7 ms ± 1.03 ms | **37.2 ms** ± 433 µs |
+| 10000  | 350 ms ± 4.56 ms  | **343 ms** ± 5.41 ms | 746 ms ± 5.29 ms | **350 ms** ± 7.42 ms |
+| 100000  | 3.48 s ± 11.9 ms  | **3.48 s** ± 6.44 ms | 7.44 s ± 20.1 ms | **3.52 s** ± 9.27 ms |
+
 ## Usage
 
 This class can be used in a few different ways depending on your needs. The data should be passed to the initialization of the class. Then calling the class will produce the result with desired method (pearson is the default). Note that the method should be passed to the call, not the initialization. The examples below will result in pearson, pearson, and spearman correlations.
