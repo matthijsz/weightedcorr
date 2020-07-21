@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-
+from scipy.stats import rankdata
 
 class WeightedCorr:
     def __init__(self, xyw=None, x=None, y=None, w=None, df=None, wcol=None):
@@ -16,10 +16,10 @@ class WeightedCorr:
         if (df is None) and (wcol is None):
             if np.all([i is None for i in [xyw, x, y, w]]):
                 raise ValueError('No data supplied')
-            if (isinstance(xyw, pd.DataFrame)) != np.all([isinstance(i, pd.Series) for i in [x, y, w]]):
+            if not ((isinstance(xyw, pd.DataFrame)) != (np.all([isinstance(i, pd.Series) for i in [x, y, w]]))):
                 raise TypeError('xyw should be a pd.DataFrame, or x, y, w should be pd.Series')
             xyw = pd.concat([x, y, w], axis=1).dropna() if xyw is None else xyw.dropna()
-            self.x, self.y, self.w = (pd.to_numeric(xyw[i], errors='coerce') for i in xyw.columns)
+            self.x, self.y, self.w = (pd.to_numeric(xyw[i], errors='coerce').values for i in xyw.columns)
             self.df = None
         elif (wcol is not None) and (df is not None):
             if (not isinstance(df, pd.DataFrame)) or (not isinstance(wcol, str)):
@@ -40,11 +40,9 @@ class WeightedCorr:
         return self._wcov(x, y, [mx, my]) / np.sqrt(self._wcov(x, x, [mx, mx]) * self._wcov(y, y, [my, my]))
 
     def _wrank(self, x):
-        rw = pd.DataFrame([x.rank(), self.w], index=['r', 'w']).transpose()
-        a = rw[['r', 'w']].groupby(['r']).agg('sum')['w']
-        xa = rw['r'].map(a.cumsum() - a)
-        xb = rw['r'].map(((rw['r'].value_counts() + 1)/2) * rw[['r', 'w']].groupby(['r']).agg('mean')['w'])
-        return xa+xb
+        (unique, arr_inv, counts) = np.unique(rankdata(x), return_counts=True, return_inverse=True)
+        a = np.bincount(arr_inv, self.w)
+        return (np.cumsum(a) - a)[arr_inv]+((counts + 1)/2 * (a/counts))[arr_inv]
 
     def _spearman(self, x=None, y=None):
         x, y = (self.x, self.y) if ((x is None) and (y is None)) else (x, y)
