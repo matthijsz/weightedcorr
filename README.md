@@ -27,7 +27,7 @@ WeightedCorr(xyw=my_data[['x', 'y', 'w']])(method='pearson')
 ```
 WeightedCorr(x=my_data['x'], y=my_data['y'], w=my_data['w'])()
 ```
-3. You can supply a pandas DataFrame, and the name of the weight column in that DataFrame. In this case the output will be an MxM pandas DataFrame (the correlation matrix) for M columns, not including the weights columns.
+3. You can supply a pandas DataFrame, and the name of the weight column in that DataFrame. In this case the output will be an (M-1)x(M-1) pandas DataFrame (the correlation matrix) where M is the number of columns in the original dataframe (no correlation is calculated for the weight column, hence M-1).
 ```
 WeightedCorr(df=my_data, wcol='w')(method='pearson')
 ```
