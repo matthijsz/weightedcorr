@@ -32,7 +32,7 @@ class WeightedCorr:
             raise ValueError('Incorrect arguments specified, please specify xyw, or (x, y, w) or (df, wcol)')
 
     def _wcov(self, x, y, ms):
-        return np.sum(self.w * (x - ms[0]) * (y - ms[1])) / np.sum(self.w)
+        return np.sum(self.w * (x - ms[0]) * (y - ms[1]))
 
     def _pearson(self, x=None, y=None):
         x, y = (self.x, self.y) if ((x is None) and (y is None)) else (x, y)
