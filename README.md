@@ -3,6 +3,10 @@ Weighted correlation in Python. Pandas based implementation of weighted Pearson 
 
 I thought it was strange that I couldn't easily find a way to get both these weighted correlations with a single class/function in Python. So I made it myself.
 
+# v2.1 20-03-2021
+
+Fixed Issue #1
+
 # V2 Update 21-07-2020
 
 Switched from a `pandas` backend to a `numpy`/`scipy` backend. Usage remains the same, but performance for Spearman correlations is significantly improved. See table below.
