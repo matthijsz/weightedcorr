@@ -50,10 +50,14 @@ class TestUnweighted(unittest.TestCase):
 class TestWeighted(unittest.TestCase):
     def test_weighted(self):
         z1 = np.random.randn(1000, 2) + 2
-        z2 = np.random.randn(1000, 2) - 2 
+        z2 = np.random.randn(1000, 2) - 2
+        # make some values tied
+        z2[10:100, 1] = 1.5
         z = np.concatenate([z1, z2], axis=0)
 
         w = np.arange(1, len(z)+1)
+        # make it so there are duplicate values
+        w[::2] = w[1::2]
 
         wx = get_weighted_rank(z[:, 0], w)
         wy = get_weighted_rank(z[:, 1], w)
