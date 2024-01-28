@@ -2,7 +2,6 @@ import numpy as np
 import pandas as pd
 from scipy.stats import rankdata
 
-__version__ = "2.1.0"
 
 class WeightedCorr:
     def __init__(self, xyw=None, x=None, y=None, w=None, df=None, wcol=None):
