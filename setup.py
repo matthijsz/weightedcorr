@@ -1,7 +1,7 @@
 from setuptools import setup
 import sys
 sys.path.insert(0, ".")
-from WeightedCorr import __version__
+from version import __version__
 
 setup(
     name='WeightedCorr',
