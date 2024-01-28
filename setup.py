@@ -1,7 +1,8 @@
+__version__ = "2.1.0"
+
 from setuptools import setup
 import sys
 sys.path.insert(0, ".")
-from version import __version__
 
 setup(
     name='WeightedCorr',
