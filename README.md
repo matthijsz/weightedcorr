@@ -44,13 +44,13 @@ WeightedCorr(df=my_data, wcol='w')(method='pearson')
 
 The weighted Pearson r, given _n_ pairs is calculated as
 
-<img src="https://render.githubusercontent.com/render/math?math=r_{pearson} = \frac{\sum_{i=1}^{n} (w_i(x_i - \overline{x})(y_i - \overline{y}))}  {\sqrt{\sum_{i=1}^{n}(w_i(x_i-\overline{x})^2) \sum_{i=1}^{n}(w_i(y_i-\overline{y})^2) }}" height="60">
+$$ \frac{\sum_{i=1}^{n} (w_i(x_i - \overline{x})(y_i - \overline{y}))}  {\sqrt{\sum_{i=1}^{n}(w_i(x_i-\overline{x})^2) \sum_{i=1}^{n}(w_i(y_i-\overline{y})^2) }} $$
 
 Where
 
-<img src="https://render.githubusercontent.com/render/math?math=\overline{x} = \frac{\sum_{i=1}^{n} (w_i*x_i)} {\sum_{i=1}^{n} w_i}" height="50">
+$$ \overline{x} = \frac{\sum_{i=1}^{n} (w_i*x_i)} {\sum_{i=1}^{n} w_i} $$
 
-<img src="https://render.githubusercontent.com/render/math?math=\overline{y} = \frac{\sum_{i=1}^{n} (w_i*y_i)} {\sum_{i=1}^{n} w_i}" height="50">
+$$ \overline{y} = \frac{\sum_{i=1}^{n} (w_i*y_i)} {\sum_{i=1}^{n} w_i} $$
 
 
 
@@ -59,15 +59,16 @@ Where
 
 First, initial ranks (_z_) are assigned to x and y. Duplicate groups of records are assigned the average rank of that group. Next the weighted rank (_rank_) is calculated for x and y separately in _n_ pairs. Such that the _j_-th _rank_ of either x or y will be:
 
-<img src="https://render.githubusercontent.com/render/math?math=rank_j = \sum_{i=1}^n (w_i *{\bf A} (z_i, z_j)) %2B \frac{1%2B\sum_{i=1}^{n} {\bf B}(w_i, w_j)} {2} * \frac{\sum_{i=1}^{n} w_i*{\bf B}(w_i, w_j)}{\sum_{i=1}^{n} {\bf B}(w_i, w_j)}" height="60">
-
+```math
+rank_j = \sum_{i=1}^n (w_i *{\bf A} (z_i, z_j)) %2B \frac{1%2B\sum_{i=1}^{n} {\bf B}(w_i, w_j)} {2} * \frac{\sum_{i=1}^{n} w_i*{\bf B}(w_i, w_j)}{\sum_{i=1}^{n} {\bf B}(w_i, w_j)} 
+```
 
 Where
-
-<img src="https://render.githubusercontent.com/render/math?math={\bf A} (z_i, z_j) =\begin{cases}1 %26 \text{if } z_i %3C z_j\\0 %26\text{if } z_i \geq  z_j\end{cases}" height="60">
-
+```math
+{\bf A} (z_i, z_j) = \begin{cases}1 & \text{if } z_i < z_j\\0 & \text{if } z_i \geq  z_j \end{cases}
+```
 and
-
-<img src="https://render.githubusercontent.com/render/math?math={\bf B} (w_i, w_j) =\begin{cases}1 %26 \text{if } w_i = w_j\\0 %26 \text{if } w_i \neq  w_j\end{cases}" height="60">
-
+```math
+{\bf B} (w_i, w_j) = \begin{cases}1 & \text{if } w_i = w_j\\0 & \text{if } w_i \neq  w_j \end{cases}
+```
 These weighted ranks are then passed to the weighted Pearson correlation function.
